@@ -4,17 +4,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class App {
+    public static caminhoPercorridoQuantidadeOuro[][] matrizMelhorCaminho;
+
     public static void main(String[] args) throws Exception {
-        if(args.length == 0){
+        if (args.length == 0) {
             System.out.println("Nenhum arquivo texto inserido. Leia o README.md");
             return;
         }
         String arquivo = args[0];
         String[][] matrizPercorrer = leTexto(arquivo);
+        matrizMelhorCaminho = new caminhoPercorridoQuantidadeOuro[matrizPercorrer.length][matrizPercorrer.length];
+        verificaCaminhoOtimizado(2, 3);
         ArrayList<String> caminhoPercorrido = new ArrayList<>();
-        caminhoPercorridoQuantidadeOuro calculaValor = calculaCaminho(matrizPercorrer, matrizPercorrer.length - 1, 0, caminhoPercorrido);
+        caminhoPercorridoQuantidadeOuro calculaValor = calculaCaminho(matrizPercorrer, matrizPercorrer.length - 1, 0,
+                caminhoPercorrido);
         System.out.println("Valor de ouro acumulado: " + calculaValor.valor);
-        System.out.println("Caminho percorrido: " + String.join("," , calculaValor.caminhoPercorrido));
+        System.out.println("Caminho percorrido: " + String.join(",", calculaValor.caminhoPercorrido));
     }
 
     public static void printaMatriz(String[][] matriz) {
@@ -27,49 +32,62 @@ public class App {
         System.out.println();
     }
 
-
-    public static void printaCaminho(ArrayList<String> caminhoPercorrido){
-        for(String percorrido: caminhoPercorrido){
-          System.out.println(percorrido + " - "  + "ESTOU AQ");
-        } 
+    public static void printaCaminho(ArrayList<String> caminhoPercorrido) {
+        for (String percorrido : caminhoPercorrido) {
+            System.out.println(percorrido + " - " + "ESTOU AQ");
+        }
     }
 
-    public static caminhoPercorridoQuantidadeOuro calculaCaminho(String[][] percurso, int x, int y, ArrayList<String> caminhoPercorrido){
-        if(x == 0 && y == (percurso.length - 1)){
-            return new caminhoPercorridoQuantidadeOuro(Integer.parseInt(percurso[x][y]), caminhoPercorrido);
+    public static caminhoPercorridoQuantidadeOuro verificaCaminhoOtimizado(int x, int y) {
+        if (matrizMelhorCaminho[x][y] == null) {
+            return null;
+        } else {
+            return matrizMelhorCaminho[x][y];
         }
-        else if( x == 0 ){
+    }
+
+    public static caminhoPercorridoQuantidadeOuro calculaCaminho(String[][] percurso, int x, int y,
+            ArrayList<String> caminhoPercorrido) {
+        if (x == 0 && y == (percurso.length - 1)) {
+            return new caminhoPercorridoQuantidadeOuro(Integer.parseInt(percurso[x][y]), caminhoPercorrido);
+        } else if (x == 0) {
             ArrayList<String> novoCaminhoPercorrido = new ArrayList<>(caminhoPercorrido);
             novoCaminhoPercorrido.add("E");
-            caminhoPercorridoQuantidadeOuro caminhoSelecionado = calculaCaminho(percurso, x, y + 1, novoCaminhoPercorrido);
-            return new caminhoPercorridoQuantidadeOuro( caminhoSelecionado.valor + verificaValor(percurso[x][y]), caminhoSelecionado.caminhoPercorrido );
-        }
-        else if(y == percurso.length - 1){
+            caminhoPercorridoQuantidadeOuro caminhoSelecionado = calculaCaminho(percurso, x, y + 1,
+                    novoCaminhoPercorrido);
+            return new caminhoPercorridoQuantidadeOuro(caminhoSelecionado.valor + verificaValor(percurso[x][y]),
+                    caminhoSelecionado.caminhoPercorrido);
+        } else if (y == percurso.length - 1) {
             ArrayList<String> novoCaminhoPercorrido = new ArrayList<>(caminhoPercorrido);
             novoCaminhoPercorrido.add("N");
-            caminhoPercorridoQuantidadeOuro caminhoSelecionado = calculaCaminho(percurso, x-1, y, novoCaminhoPercorrido);
-            return new caminhoPercorridoQuantidadeOuro((caminhoSelecionado.valor + verificaValor(percurso[x][y])), caminhoSelecionado.caminhoPercorrido);
-        }
-        else{
+            caminhoPercorridoQuantidadeOuro caminhoSelecionado = calculaCaminho(percurso, x - 1, y,
+                    novoCaminhoPercorrido);
+            return new caminhoPercorridoQuantidadeOuro((caminhoSelecionado.valor + verificaValor(percurso[x][y])),
+                    caminhoSelecionado.caminhoPercorrido);
+        } else {
             ArrayList<String> novoCaminhoPercorridoNE = new ArrayList<>(caminhoPercorrido);
             novoCaminhoPercorridoNE.add("NE");
             ArrayList<String> novoCaminhoPercorridoN = new ArrayList<>(caminhoPercorrido);
             novoCaminhoPercorridoN.add("N");
             ArrayList<String> novoCaminhoPercorridoE = new ArrayList<>(caminhoPercorrido);
             novoCaminhoPercorridoE.add("E");
-            caminhoPercorridoQuantidadeOuro caminhoSelecionado = retornaCaminhoEscolhido(calculaCaminho(percurso, x-1, y+1, novoCaminhoPercorridoNE), calculaCaminho(percurso, x-1, y, novoCaminhoPercorridoN), calculaCaminho(percurso, x, y+1, novoCaminhoPercorridoE));
-            return new caminhoPercorridoQuantidadeOuro(caminhoSelecionado.valor + verificaValor(percurso[x][y]), caminhoSelecionado.caminhoPercorrido);
+            caminhoPercorridoQuantidadeOuro caminhoSelecionado = retornaCaminhoEscolhido(
+                    calculaCaminho(percurso, x - 1, y + 1, novoCaminhoPercorridoNE),
+                    calculaCaminho(percurso, x - 1, y, novoCaminhoPercorridoN),
+                    calculaCaminho(percurso, x, y + 1, novoCaminhoPercorridoE));
+            return new caminhoPercorridoQuantidadeOuro(caminhoSelecionado.valor + verificaValor(percurso[x][y]),
+                    caminhoSelecionado.caminhoPercorrido);
         }
     }
 
-    public static caminhoPercorridoQuantidadeOuro retornaCaminhoEscolhido(caminhoPercorridoQuantidadeOuro NE, caminhoPercorridoQuantidadeOuro N, caminhoPercorridoQuantidadeOuro E){
-        if(NE.valor >= N.valor && NE.valor >= E.valor){
+    public static caminhoPercorridoQuantidadeOuro retornaCaminhoEscolhido(caminhoPercorridoQuantidadeOuro NE,
+            caminhoPercorridoQuantidadeOuro N, caminhoPercorridoQuantidadeOuro E) {
+        if (NE.valor >= N.valor && NE.valor >= E.valor) {
             return NE;
         }
-        if(N.valor >= NE.valor && N.valor >= E.valor){
+        if (N.valor >= NE.valor && N.valor >= E.valor) {
             return N;
-        }
-        else{
+        } else {
             return E;
         }
     }
