@@ -11,8 +11,8 @@ public class App {
         }
         String arquivo = args[0];
         String[][] matrizPercorrer = leTexto(arquivo);
-        // calculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new calculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
-        // caminhoSemMemorizacao.calculaCaminhoRecursivo();
+        CalculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new CalculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
+        caminhoSemMemorizacao.calculaCaminhoRecursivo();
         CalculcaCaminhoRecursivoComMemorizacao calculcaCaminhoRecursivoComMemorizacao = new CalculcaCaminhoRecursivoComMemorizacao(matrizPercorrer);
         calculcaCaminhoRecursivoComMemorizacao.calculaCaminhoMemorizacao(); 
 
@@ -32,13 +32,14 @@ public class App {
         String[][] matriz = new String[0][0];
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
             String line = br.readLine();
+            line.trim();
+            int matrizLength = Integer.parseInt(line);
             boolean isFirstLine = false;
             int index = 0;
-            while (line != null) {
+            while (line != null && index < matrizLength) {
                 if (!isFirstLine) {
                     isFirstLine = true;
-                    line.trim();
-                    matriz = new String[Integer.parseInt(line)][Integer.parseInt(line)];
+                    matriz = new String[matrizLength][matrizLength];
                     line = br.readLine();
                 } else {
                     String[] splited = line.trim().split("\\s+");
