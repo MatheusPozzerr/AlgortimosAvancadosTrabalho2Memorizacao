@@ -16,7 +16,6 @@ public class CalculcaCaminhoRecursivoComMemorizacao {
         CaminhoPercorridoQuantidadeOuro calculaValor = calculaCaminho(matrizPercorrer, matrizPercorrer.length - 1, 0,
                 caminhoPercorrido);
         System.out.println("Valor de ouro acumulado: " + calculaValor.valor);
-        System.out.println("Tsteee" + matrizMelhorCaminho[3][2].caminhoPercorrido.toString());
         Collections.reverse(calculaValor.caminhoPercorrido);
         System.out.println("Caminho percorrido: " + String.join(",", calculaValor.caminhoPercorrido));
     }
@@ -34,11 +33,9 @@ public class CalculcaCaminhoRecursivoComMemorizacao {
         if (verificaCaminhoOtimizado(x, y) != null) {
             ArrayList<String> novoCaminhoPercorrido = new ArrayList<>();
             CaminhoPercorridoQuantidadeOuro melhorCaminho = verificaCaminhoOtimizado(x, y);
-            System.out.println(melhorCaminho.caminhoPercorrido.toString()+ "VAPOVAPOVPAO " + x + " " + y);
             for (String caminho : melhorCaminho.caminhoPercorrido) {
                 novoCaminhoPercorrido.add(caminho);
             }
-            System.out.println(novoCaminhoPercorrido.toString()+ "KKKK " + x + " " + y);
             return new CaminhoPercorridoQuantidadeOuro(melhorCaminho.valor, novoCaminhoPercorrido);
         }
         if (x == 0 && y == (percurso.length - 1)) {
@@ -91,19 +88,17 @@ public class CalculcaCaminhoRecursivoComMemorizacao {
         if (NE.valor >= N.valor && NE.valor >= E.valor) {
             ArrayList<String> novoCaminhoPercorrido = new ArrayList<>(NE.caminhoPercorrido);
             novoCaminhoPercorrido.add("NE");
-            NE.caminhoPercorrido = novoCaminhoPercorrido;
-            return NE;
+            return new CaminhoPercorridoQuantidadeOuro(NE.valor, novoCaminhoPercorrido);
         }
         if (N.valor >= NE.valor && N.valor >= E.valor) {
             ArrayList<String> novoCaminhoPercorrido = new ArrayList<>(N.caminhoPercorrido);
             novoCaminhoPercorrido.add("N");
-            N.caminhoPercorrido = novoCaminhoPercorrido;
-            return N;
+            return new CaminhoPercorridoQuantidadeOuro(N.valor, novoCaminhoPercorrido);
         } else {
             ArrayList<String> novoCaminhoPercorrido = new ArrayList<>(E.caminhoPercorrido);
             novoCaminhoPercorrido.add("E");
-            E.caminhoPercorrido = novoCaminhoPercorrido;
-            return E;
+            return new CaminhoPercorridoQuantidadeOuro(E.valor, novoCaminhoPercorrido);
+
         }
     }
 

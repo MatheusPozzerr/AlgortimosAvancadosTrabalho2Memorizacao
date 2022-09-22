@@ -5,12 +5,12 @@ import java.io.IOException;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
-            System.out.println("Nenhum arquivo texto inserido. Leia o README.md");
-            return;
-        }
-        String arquivo = args[0];
-        String[][] matrizPercorrer = leTexto(arquivo);
+        // if (args.length == 0) {
+        //     System.out.println("Nenhum arquivo texto inserido. Leia o README.md");
+        //     return;
+        // }
+        // String arquivo = args[0];
+        String[][] matrizPercorrer = leTexto("teste1.txt");
         CalculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new CalculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
         caminhoSemMemorizacao.calculaCaminhoRecursivo();
         CalculcaCaminhoRecursivoComMemorizacao calculcaCaminhoRecursivoComMemorizacao = new CalculcaCaminhoRecursivoComMemorizacao(matrizPercorrer);
