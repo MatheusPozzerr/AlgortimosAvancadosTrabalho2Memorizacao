@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CalculcaCaminhoRecursivoComMemorizacao {
+public class CalculaCaminhoRecursivoComMemorizacao {
 
     private CaminhoPercorridoQuantidadeOuro[][] matrizMelhorCaminho;
     private String[][] matrizPercorrer;
 
-    public CalculcaCaminhoRecursivoComMemorizacao(String[][] percurso) {
+    public CalculaCaminhoRecursivoComMemorizacao(String[][] percurso) {
         this.matrizPercorrer = percurso;
         this.matrizMelhorCaminho = new CaminhoPercorridoQuantidadeOuro[matrizPercorrer.length][matrizPercorrer.length];
     }

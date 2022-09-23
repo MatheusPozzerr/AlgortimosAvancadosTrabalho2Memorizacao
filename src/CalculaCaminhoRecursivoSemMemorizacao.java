@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class CalculaCaminhoRecursivoSemMemorizacao {
 
     private String[][] matrizPercorrer;
@@ -9,7 +7,6 @@ public class CalculaCaminhoRecursivoSemMemorizacao {
     }
 
     public void calculaCaminhoRecursivo() {
-        ArrayList<String> caminhoPercorrido = new ArrayList<>();
         int calculaValor = calculaCaminho(matrizPercorrer, matrizPercorrer.length - 1, 0);
         System.out.println("Valor de ouro acumulado: " + calculaValor);
     }

@@ -5,16 +5,23 @@ import java.io.IOException;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        // if (args.length == 0) {
-        //     System.out.println("Nenhum arquivo texto inserido. Leia o README.md");
-        //     return;
-        // }
-        // String arquivo = args[0];
-        String[][] matrizPercorrer = leTexto("teste1.txt");
-        CalculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new CalculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
-        caminhoSemMemorizacao.calculaCaminhoRecursivo();
-        CalculcaCaminhoRecursivoComMemorizacao calculcaCaminhoRecursivoComMemorizacao = new CalculcaCaminhoRecursivoComMemorizacao(matrizPercorrer);
+        if (args.length == 0) {
+            System.out.println("Nenhum arquivo texto inserido. Leia o README.md");
+            return;
+        }
+        String arquivo = args[0];
+        String[][] matrizPercorrer = leTexto(arquivo);
+        // System.out.println("ALGORITMO 1 : RECURSAO SEM MEMORIZACAO");
+        // CalculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new CalculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
+        // caminhoSemMemorizacao.calculaCaminhoRecursivo();
+        // System.out.println("----------------------------------");
+        System.out.println("ALGORITMO 2 : RECURSAO COM MEMORIZACAO");
+        CalculaCaminhoRecursivoComMemorizacao calculcaCaminhoRecursivoComMemorizacao = new CalculaCaminhoRecursivoComMemorizacao(matrizPercorrer);
         calculcaCaminhoRecursivoComMemorizacao.calculaCaminhoMemorizacao(); 
+        System.out.println("----------------------------------");
+        System.out.println("ALGORITMO 3 : SEM RECURSAO");
+        CalculaCaminhoSemRecursao calculaCaminhoSemRecursao = new CalculaCaminhoSemRecursao(matrizPercorrer);
+        calculaCaminhoSemRecursao.calculaCaminhoNaoRecursio();
 
     }
 
