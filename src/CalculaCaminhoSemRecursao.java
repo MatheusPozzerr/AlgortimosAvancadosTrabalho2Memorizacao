@@ -64,7 +64,6 @@ public class CalculaCaminhoSemRecursao {
                 y++;
             }
             else if (y == matrizQuantidadeOuro.length - 1) {
-                System.out.println("Entrei aqui por ultimo");
                 caminhoFinal.add("N");
                 x--;
             } else {

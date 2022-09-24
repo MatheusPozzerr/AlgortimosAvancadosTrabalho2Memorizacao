@@ -43,7 +43,7 @@ public class CalculaCaminhoRecursivoSemMemorizacao {
 
     private int verificaValor(String valor) {
         if (valor.equals("x")) {
-            return -999999;
+            return -999999999;
         } else {
             return Integer.valueOf(valor).intValue();
         }
