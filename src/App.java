@@ -11,10 +11,10 @@ public class App {
         }
         String arquivo = args[0];
         String[][] matrizPercorrer = leTexto(arquivo);
-        // System.out.println("ALGORITMO 1 : RECURSAO SEM MEMORIZACAO");
-        // CalculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new CalculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
-        // caminhoSemMemorizacao.calculaCaminhoRecursivo();
-        // System.out.println("----------------------------------");
+        System.out.println("ALGORITMO 1 : RECURSAO SEM MEMORIZACAO");
+        CalculaCaminhoRecursivoSemMemorizacao caminhoSemMemorizacao = new CalculaCaminhoRecursivoSemMemorizacao(matrizPercorrer);
+        caminhoSemMemorizacao.calculaCaminhoRecursivo();
+        System.out.println("----------------------------------");
         System.out.println("ALGORITMO 2 : RECURSAO COM MEMORIZACAO");
         CalculaCaminhoRecursivoComMemorizacao calculcaCaminhoRecursivoComMemorizacao = new CalculaCaminhoRecursivoComMemorizacao(matrizPercorrer);
         calculcaCaminhoRecursivoComMemorizacao.calculaCaminhoMemorizacao(); 
